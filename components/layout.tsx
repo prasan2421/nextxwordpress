@@ -20,11 +20,11 @@ export default function Layout({ children }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <div className="bg-white">
+    <div className="bg-white dark:bg-gray-800">
      
       <header className="absolute inset-x-0 top-0 z-50">
       {/* <Alert preview={preview} /> */}
-        <nav className="flex items-center justify-between p-6 lg:px-8 bg-white " aria-label="Global">
+        <nav className="flex items-center justify-between p-6 lg:px-8 bg-white dark:bg-gray-900" aria-label="Global">
           <div className="flex lg:flex-1">
             <Link 
             href={'/'}
@@ -52,7 +52,7 @@ export default function Layout({ children }) {
                <Link
                href={item.href}
                key={item.name}
-               className="text-sm font-semibold leading-6 text-gray-900  hover:text-red-700"
+               className="text-sm font-semibold leading-6 text-gray-900 dark:text-slate-50  hover:text-red-700"
              >{item.name}</Link>
              
             ))}

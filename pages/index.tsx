@@ -36,10 +36,10 @@ export default function Index({ allPosts: { edges }, preview }) {
         <div className="m-auto ">
          
           <div className="text-center">
-            <h1 className="text-2xl md:text-4xl lg:text-9xl font-bold tracking-tight text-gray-900  ">
+            <h1 className="text-2xl md:text-4xl lg:text-9xl font-bold tracking-tight text-gray-900 dark:text-slate-100 ">
               Welcome to <span className='text-red-600'>TEDx</span><span className='font-light'>Trondheim</span>
             </h1>
-            <p className="mt-6 text-lg leading-8 text-gray-600">
+            <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-slate-400">
               Learn about ideas worth spreading by attending our <span className='text-red-600 font-bold'>TEDx</span> events, watching our <span className='text-red-600 font-bold'>TEDx</span> talks and reading our <span className='text-red-600 font-bold'>TEDx</span> blogs.
             </p>
             {/* <div className="mt-10 flex items-center justify-center gap-x-6">
@@ -79,7 +79,7 @@ export default function Index({ allPosts: { edges }, preview }) {
       </div>
       <div className="mt-5 ">
       <div className="text-center mb-16">
-            <h1 className=" lg:text-7xl leading-auto font-bold  text-gray-900 sm:text-4xl">
+            <h1 className=" lg:text-7xl leading-auto font-bold  text-gray-900 dark:text-slate-100 sm:text-4xl">
              Up coming event
             </h1>
             </div>
