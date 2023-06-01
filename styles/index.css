@@ -107,3 +107,7 @@
   background:red;
   display: none!important;
 }
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}

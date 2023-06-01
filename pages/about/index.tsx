@@ -3,8 +3,9 @@ import YouTube, { YouTubeProps }  from 'react-youtube';
 
 // import { listAllVideos } from '../../components/youtube';
 const YT_API_SCRIPT = 'https://www.youtube.com/player_api';
+const apiKey = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
 
-export default function VideosPage(videos) {
+export default function VideosPage(videos:any) {
   const playerRef = useRef(null);
 
   // useEffect(() => {
@@ -64,7 +65,7 @@ export default function VideosPage(videos) {
 
 
 export async function getStaticProps() {
-  const response = await fetch ('https://youtube.googleapis.com/youtube/v3/search?key=AIzaSyD7A1fIVaRcqwK6l187-BB52JiEqr7Lmdc&channelId=UCnXXusQQ65Q6vPRe0ve26cA&part=snippet&type=video')
+  const response = await fetch (`https://youtube.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=UCnXXusQQ65Q6vPRe0ve26cA&part=snippet&type=video`)
   const videos = await response.json();
 
   return {

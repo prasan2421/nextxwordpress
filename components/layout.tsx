@@ -1,12 +1,15 @@
 import Alert from './alert'
 import Footer from './footer'
 import Meta from './meta'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import Image from 'next/image'
 import profilePic from '../public/images/tedx.png'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, XMarkIcon, SunIcon } from '@heroicons/react/24/outline'
+
 import Link from 'next/link'
+import { useTheme } from 'next-themes'
+
 
 const navigation = [
   { name: 'HOME', href: '/' },
@@ -18,7 +21,20 @@ const navigation = [
 
 export default function Layout({ children }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const { theme, setTheme, resolvedTheme } = useTheme()
 
+
+  const setLightMode = () => {
+    setTheme('light');
+  };
+
+  const setDarkMode = () => {
+    setTheme('dark');
+  };
+
+  const setSystemDefault = () => {
+    setTheme('system');
+  };
   return (
     <div className="bg-white dark:bg-gray-800">
      
@@ -47,7 +63,21 @@ export default function Layout({ children }) {
               <Bars3Icon className="h-6 w-6" aria-hidden="true" />
             </button>
           </div>
-          <div className="hidden lg:flex lg:gap-x-12">
+          <div className=" hidden lg:flex lg:gap-x-12">
+          {/* <p className="mt-4 text-gray-600">Current Theme: {resolvedTheme}</p> */}
+          <div className="dropdown">
+          <p
+        className=" p-2 rounded-full bg-gray-200 dark:bg-gray-800"
+        // onClick={toggleTheme}
+      >
+        {theme}
+      </p>
+      <ul className="dropdown-menu absolute top-16 hidden text-gray-700 pt-1">
+      <li className="flex"><button className="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" onClick={setSystemDefault} >System</button></li>
+      <li className=""><button className="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" onClick={setDarkMode}>Dark</button></li>
+      <li className=""><button className="rounded-b bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" onClick={setLightMode}>Light</button></li>
+    </ul>
+    </div>
             {navigation.map((item) => (
                <Link
                href={item.href}
@@ -92,6 +122,7 @@ export default function Layout({ children }) {
             <div className="mt-6 flow-root">
               <div className="-my-6 divide-y divide-gray-500/10">
                 <div className="space-y-2 py-6">
+               
                   {navigation.map((item) => (
                     <a
                       key={item.name}
