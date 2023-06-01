@@ -13,7 +13,7 @@ import { useTheme } from 'next-themes'
 
 const navigation = [
   { name: 'HOME', href: '/' },
-  { name: 'ABOUT', href: '/about' },
+  { name: 'Videos', href: '/about' },
   { name: 'EVENTS', href: '/events' },
   { name: 'MEET THE TEAM', href: '/team' },
   { name: 'VOLUNTEER', href: '/volunteer' },
