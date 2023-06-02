@@ -2,5 +2,13 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js"
+  "/api/exit-preview": "pages/api/exit-preview.js",
+  "/api/preview": "pages/api/preview.js",
+  "/team": "pages/team.html",
+  "/events": "pages/events.js",
+  "/volunteer": "pages/volunteer.html",
+  "/posts/[slug]": "pages/posts/[slug].js",
+  "/about": "pages/about.js",
+  "/": "pages/index.js",
+  "/404": "pages/404.html"
 }
