@@ -11,6 +11,9 @@ export default function HeroPost({
   author,
   slug,
 }) {
+
+  const decodedExcerpt = excerpt.replace(/<a\b[^>]*>(.*?)<\/a>/gi, '');
+
   return (
     <section className='md:mb-10 w-full rounded-lg p-7 text-sm text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20'>
       <div className="my-8 md:mb-16 ">
@@ -35,7 +38,7 @@ export default function HeroPost({
         <div  className='md:col-span-2'>
           <div
             className="text-lg leading-relaxed mb-4"
-            dangerouslySetInnerHTML={{ __html: excerpt }}
+            dangerouslySetInnerHTML={{ __html: decodedExcerpt }}
           />
           <Avatar author={author} />
         </div>

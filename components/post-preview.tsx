@@ -11,6 +11,9 @@ export default function PostPreview({
   author,
   slug,
 }) {
+
+  const decodedExcerpt = excerpt.replace(/<a\b[^>]*>(.*?)<\/a>/gi, '');
+
   return (
    <div>
     <Link
@@ -31,7 +34,7 @@ export default function PostPreview({
       </div>
       <div
         className="text-lg leading-relaxed mb-4"
-        dangerouslySetInnerHTML={{ __html: excerpt }}
+        dangerouslySetInnerHTML={{ __html: decodedExcerpt }}
       />
       {/* <Avatar author={author} /> */}
     </div>

@@ -5,15 +5,14 @@ import { useEffect, useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import Image from 'next/image'
 import profilePic from '../public/images/tedx.png'
-import { Bars3Icon, XMarkIcon, SunIcon } from '@heroicons/react/24/outline'
-
+import { Bars3Icon, XMarkIcon, SunIcon, MoonIcon,ComputerDesktopIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { useTheme } from 'next-themes'
 
 
 const navigation = [
   { name: 'HOME', href: '/' },
-  { name: 'Videos', href: '/about' },
+  { name: 'VIDEOS', href: '/about' },
   { name: 'EVENTS', href: '/events' },
   { name: 'MEET THE TEAM', href: '/team' },
   { name: 'VOLUNTEER', href: '/volunteer' },
@@ -23,18 +22,19 @@ export default function Layout({ children }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const { theme, setTheme, resolvedTheme } = useTheme()
 
-
-  const setLightMode = () => {
-    setTheme('light');
-  };
-
-  const setDarkMode = () => {
-    setTheme('dark');
-  };
-
-  const setSystemDefault = () => {
+  useEffect(()=>{
     setTheme('system');
+  },[])
+
+  const toggleTheme = () => {
+   
+    if (resolvedTheme === 'light') {
+      setTheme('dark');
+    } else if (resolvedTheme === 'dark') {
+      setTheme('light');
+    } 
   };
+
   return (
     <div className="bg-white dark:bg-gray-800">
      
@@ -63,21 +63,14 @@ export default function Layout({ children }) {
               <Bars3Icon className="h-6 w-6" aria-hidden="true" />
             </button>
           </div>
-          <div className=" hidden lg:flex lg:gap-x-12">
-          {/* <p className="mt-4 text-gray-600">Current Theme: {resolvedTheme}</p> */}
-          <div className="dropdown">
-          <p
-        className=" p-2 rounded-full bg-gray-200 dark:bg-gray-800"
-        // onClick={toggleTheme}
+          <div className="hidden lg:flex lg:gap-x-12">
+          {/* <p className="mt-4 text-gray-600">Current Theme: {theme}</p> */}
+          <button
+        className="p-2 rounded-full bg-gray-800 dark:bg-white"
+        onClick={toggleTheme}
       >
-        {theme}
-      </p>
-      <ul className="dropdown-menu absolute top-16 hidden text-gray-700 pt-1">
-      <li className="flex"><button className="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" onClick={setSystemDefault} >System</button></li>
-      <li className=""><button className="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" onClick={setDarkMode}>Dark</button></li>
-      <li className=""><button className="rounded-b bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" onClick={setLightMode}>Light</button></li>
-    </ul>
-    </div>
+        {resolvedTheme === 'light' ?  <MoonIcon className="h-4 w-4" /> : resolvedTheme === 'dark' ? <SunIcon className="h-4 w-4" /> : <ComputerDesktopIcon className="h-3 w-3" />}
+      </button>
             {navigation.map((item) => (
                <Link
                href={item.href}
@@ -95,7 +88,7 @@ export default function Layout({ children }) {
         </nav>
         <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
           <div className="fixed inset-0 z-50" />
-          <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+          <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white dark:bg-gray-800 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5">
                
@@ -122,12 +115,18 @@ export default function Layout({ children }) {
             <div className="mt-6 flow-root">
               <div className="-my-6 divide-y divide-gray-500/10">
                 <div className="space-y-2 py-6">
-               
+                <button
+        className="p-2 rounded-full bg-gray-800 dark:bg-white"
+        onClick={toggleTheme}
+      >
+        {resolvedTheme === 'light' ?  <MoonIcon className="h-4 w-4" /> : resolvedTheme === 'dark' ? <SunIcon className="h-4 w-4" /> : <ComputerDesktopIcon className="h-3 w-3" />}
+      </button>
+      
                   {navigation.map((item) => (
                     <a
                       key={item.name}
                       href={item.href}
-                      className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                      className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-gray-600 "
                     >
                       {item.name}
                     </a>
@@ -146,13 +145,5 @@ export default function Layout({ children }) {
       <Footer />
     </div>
 
-    // <>  
-    //   <div className="min-h-screen">
-      
-    //         <main>{children}</main> 
-       
-    //   </div>
-      
-    // </>
   )
 }
