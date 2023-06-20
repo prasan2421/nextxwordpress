@@ -8,6 +8,7 @@ import Layout from '../components/layout'
 import { getAllPostsForHome } from '../lib/api'
 import { CMS_NAME } from '../lib/constants'
 import { useEffect } from 'react'
+import cover from '../public/images/cover.png'
 
 export default function Index({ allPosts: { edges }, preview }) {
   const heroPost = edges[1]?.node
@@ -18,30 +19,22 @@ export default function Index({ allPosts: { edges }, preview }) {
       <Head>
         <title>TEDXTRONDHEIM</title>
       </Head>
-      <Container>
       
-        <div className="relative isolate h-screen flex ">
-        <div
-          className="absolute inset-x-0 -top-40  transform-gpu overflow-hidden blur-3xl sm:-top-80"
-          aria-hidden="true"
-        >
-          <div
-            className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-            style={{
-              clipPath:
-                'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
-            }}
-          />
-        </div>
-        <div className="m-auto ">
+      <div className="flex h-screen flex-col">
+        <div className="relative isolate flex flex-1 bg-[url('../public/images/cover.png')] bg-cover">
+      
          
-          <div className="text-center">
-            <h1 className="text-2xl md:text-4xl lg:text-9xl font-bold tracking-tight text-gray-900 dark:text-slate-100 ">
-              Welcome to <span className='text-red-600'>TEDx</span><span className='font-light'>Trondheim</span>
-            </h1>
-            <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-slate-400">
+            <div className='pl-5 md:pl-14 flex-1 flex items-center'>
+            <article className="leading-none  text-2xl md:text-4xl lg:text-5xl  text-neutral-200 dark:text-neutral-200 ">
+              The largest community <br/>of TEDx enthusiasts
+            </article>
+            </div>
+            <div  className='flex-1'/>
+           
+            
+            {/* <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-slate-400">
               Learn about ideas worth spreading by attending our <span className='text-red-600 font-bold'>TEDx</span> events, watching our <span className='text-red-600 font-bold'>TEDx</span> talks and reading our <span className='text-red-600 font-bold'>TEDx</span> blogs.
-            </p>
+            </p> */}
             {/* <div className="mt-10 flex items-center justify-center gap-x-6">
               <a
                 href="#"
@@ -53,8 +46,8 @@ export default function Index({ allPosts: { edges }, preview }) {
                 Learn more <span aria-hidden="true">→</span>
               </a>
             </div> */}
-          </div>
-          <div className="hidden sm:mt-8 sm:flex sm:justify-center">
+         
+          {/* <div className="hidden sm:mt-8 sm:flex sm:justify-center">
             <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
               Announcing our next round of talks.{' '}
               <a href="#" className="font-semibold text-indigo-600">
@@ -62,21 +55,31 @@ export default function Index({ allPosts: { edges }, preview }) {
                 Watch <span aria-hidden="true">&rarr;</span>
               </a>
             </div>
-          </div>
+          </div> */}
+       
+    
+      </div>
+      <div className="w-full  bg-red-700 text-center py-4 text-white">
+        <div>
+          <p>Since 2016 more than</p>
         </div>
-        <div
-          className="absolute inset-x-0 top-[calc(100%-13rem)]  transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
-          aria-hidden="true"
-        >
-          <div
-            className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
-            style={{
-              clipPath:
-                'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
-            }}
-          />
+        <div className='flex justify-center pt-5'>
+         <div className='px-5'>
+           <p>5000</p>
+           <p>Attendees</p>
+         </div>
+         <div className='px-5'>
+           <p>100</p>
+           <p>Speakers</p>
+         </div>
+         <div  className='px-5'>
+           <p>1,00,000+</p>
+           <p>Users reached</p>
+         </div>
+        </div>
         </div>
       </div>
+      <Container>
       <div className="mt-5 ">
       <div className="text-center mb-16">
             <h1 className=" lg:text-7xl leading-auto font-bold  text-gray-900 dark:text-slate-100 sm:text-4xl">

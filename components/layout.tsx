@@ -5,17 +5,18 @@ import { useEffect, useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import Image from 'next/image'
 import profilePic from '../public/images/tedx.png'
+import profilePicLight from '../public/images/tedxwhite.png'
 import { Bars3Icon, XMarkIcon, SunIcon, MoonIcon,ComputerDesktopIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { useTheme } from 'next-themes'
 
 
 const navigation = [
-  { name: 'HOME', href: '/' },
-  { name: 'VIDEOS', href: '/about' },
-  { name: 'EVENTS', href: '/events' },
-  { name: 'MEET THE TEAM', href: '/team' },
-  { name: 'VOLUNTEER', href: '/volunteer' },
+  // { name: 'HOME', href: '/' },
+  // { name: 'VIDEOS', href: '/about' },
+  { name: 'Events ', href: '/events' },
+  { name: 'About', href: '/team' },
+  { name: 'Partners', href: '/volunteer' },
 ]
 
 export default function Layout({ children }) {
@@ -24,6 +25,7 @@ export default function Layout({ children }) {
 
   useEffect(()=>{
     setTheme('system');
+    console.log(theme)
   },[])
 
   const toggleTheme = () => {
@@ -33,14 +35,14 @@ export default function Layout({ children }) {
     } else if (resolvedTheme === 'dark') {
       setTheme('light');
     } 
-  };
+  }; 
 
   return (
-    <div className="bg-white dark:bg-gray-800">
+    <div className="bg-white dark:bg-zinc-950">
      
       <header className="absolute inset-x-0 top-0 z-50">
       {/* <Alert preview={preview} /> */}
-        <nav className="flex items-center justify-between p-6 lg:px-8 bg-white dark:bg-gray-900" aria-label="Global">
+        <nav className="fixed w-full flex items-center justify-between py-6 px-5 md:px-14  bg-white dark:bg-zinc-900" aria-label="Global">
           <div className="flex lg:flex-1">
             <Link 
             href={'/'}
@@ -48,7 +50,7 @@ export default function Layout({ children }) {
                  <Image
                   className="h-8 w-auto"
      
-        src={profilePic}
+        src={resolvedTheme=='dark'?profilePicLight:profilePic}
         alt="Picture of the TEDXTrondheim"/>
             </Link>
            
@@ -60,7 +62,7 @@ export default function Layout({ children }) {
               onClick={() => setMobileMenuOpen(true)}
             >
               <span className="sr-only">Open main menu</span>
-              <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+              <Bars3Icon className="h-6 w-6 text-black dark:text-white "  aria-hidden="true" />
             </button>
           </div>
           <div className="hidden lg:flex lg:gap-x-12">
@@ -90,26 +92,28 @@ export default function Layout({ children }) {
           <div className="fixed inset-0 z-50" />
           <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white dark:bg-gray-800 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
-              <a href="#" className="-m-1.5 p-1.5">
-               
+            
+              <Link 
+            href={'/'} className="-m-1.5 p-1.5"
+              >
                 <Image
                   className="h-8 w-auto"
      
-        src={profilePic}
+        src={resolvedTheme=='dark'?profilePicLight:profilePic}
         alt="Picture of the TEDXTrondheim"
         
         // blurDataURL="data:..." automatically provided
         // placeholder="blur" // Optional blur-up while loading
       />
                
-              </a>
+              </Link>
               <button
                 type="button"
                 className="-m-2.5 rounded-md p-2.5 text-gray-700"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <span className="sr-only">Close menu</span>
-                <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                <XMarkIcon className="h-6 w-6 text-black dark:text-white" aria-hidden="true" />
               </button>
             </div>
             <div className="mt-6 flow-root">
@@ -139,9 +143,6 @@ export default function Layout({ children }) {
         </Dialog>
       </header>
       <main>{children}</main>
-
-      
-
       <Footer />
     </div>
 
