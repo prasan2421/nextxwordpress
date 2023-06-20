@@ -7,8 +7,22 @@ import Intro from '../components/intro'
 import Layout from '../components/layout'
 import { getAllPostsForHome } from '../lib/api'
 import { CMS_NAME } from '../lib/constants'
-import { useEffect } from 'react'
+import { useEffect, useState, createRef } from 'react'
 import cover from '../public/images/cover.png'
+// import Swiper core and required modules
+import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper';
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+
+const images = [{id:1,img:'https://images.unsplash.com/photo-1506501139174-099022df5260?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1351&q=80'},{id:2,img:'https://images.unsplash.com/photo-1523438097201-512ae7d59c44?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80'},{id:3,img:'https://images.unsplash.com/photo-1513026705753-bc3fffca8bf4?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80'},{id:4,img:'https://images.unsplash.com/photo-1523438097201-512ae7d59c44?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80'},{id:5,img:'https://images.unsplash.com/photo-1513026705753-bc3fffca8bf4?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80'} ]
+
+
 
 export default function Index({ allPosts: { edges }, preview }) {
   const heroPost = edges[1]?.node
@@ -24,12 +38,12 @@ export default function Index({ allPosts: { edges }, preview }) {
         <div className="relative isolate flex flex-1 bg-[url('../public/images/cover.png')] bg-cover">
       
          
-            <div className='pl-5 md:pl-14 flex-1 flex items-center'>
-            <article className="leading-none  text-2xl md:text-4xl lg:text-5xl  text-neutral-200 dark:text-neutral-200 ">
+            <div className='justify-center md:justify-start pl-5 md:pl-14 flex-1 flex items-center '>
+            <article className="leading-none   text-4xl lg:text-5xl  text-neutral-200 dark:text-neutral-200 ">
               The largest community <br/>of TEDx enthusiasts
             </article>
             </div>
-            <div  className='flex-1'/>
+            {/* <div  className='flex-1 '/> */}
            
             
             {/* <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-slate-400">
@@ -59,9 +73,9 @@ export default function Index({ allPosts: { edges }, preview }) {
        
     
       </div>
-      <div className="w-full  bg-red-700 text-center py-4 text-white">
+      <div className="w-full  bg-red-600 text-center py-4 text-white">
         <div>
-          <p>Since 2016 more than</p>
+          <p className='text-2xl'>Since 2016 more than</p>
         </div>
         <div className='flex justify-center pt-5'>
          <div className='px-5'>
@@ -81,11 +95,43 @@ export default function Index({ allPosts: { edges }, preview }) {
       </div>
       <Container>
       <div className="mt-5 ">
-      <div className="text-center mb-16">
-            <h1 className=" lg:text-7xl leading-auto font-bold  text-gray-900 dark:text-slate-100 sm:text-4xl">
-             Up coming event
+      <div className="mb-16">
+            <h1 className=" text-xl md:text-2xl  text-gray-900 dark:text-slate-100 ">
+             Most seen videos <span className='text-red-500 text-lg ml-5'>Explore now</span>
             </h1>
             </div>
+            <div className="container mx-auto py-4">
+            <Swiper
+      // install Swiper modules
+      // style={{
+      //   "--swiper-navigation-color": "#fff",
+      //   "--swiper-pagination-color": "#fff",
+      // }}
+      modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
+      spaceBetween={50}
+      slidesPerView={3}
+      navigation
+      className="mySwiper"
+      pagination={{ clickable: true }}
+      scrollbar={{ draggable: true }}
+      onSwiper={(swiper) => console.log(swiper)}
+      onSlideChange={() => console.log('slide change')}
+    >
+       {images.map((slideContent, index) => (
+        <SwiperSlide key={index} virtualIndex={index}>
+          <img
+            key={index}
+            src={slideContent.img}
+            alt={`Slide ${index + 1}`}
+            className="mx-auto max-w-full w-full"
+            
+          />
+          
+        </SwiperSlide>
+      ))}
+     
+    </Swiper>
+    </div>
         {heroPost && (
           <HeroPost
             title={heroPost.title}
