@@ -9,24 +9,89 @@ import { getAllPostsForHome } from '../lib/api'
 import { CMS_NAME } from '../lib/constants'
 import { useEffect, useState, createRef } from 'react'
 import cover from '../public/images/cover.png'
-// import Swiper core and required modules
-import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper';
-
-import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Link from 'next/link'
+import Slider from "react-slick";
+import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/24/outline'
 
 const images = [{id:1,img:'https://images.unsplash.com/photo-1506501139174-099022df5260?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1351&q=80'},{id:2,img:'https://images.unsplash.com/photo-1523438097201-512ae7d59c44?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80'},{id:3,img:'https://images.unsplash.com/photo-1513026705753-bc3fffca8bf4?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80'},{id:4,img:'https://images.unsplash.com/photo-1523438097201-512ae7d59c44?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80'},{id:5,img:'https://images.unsplash.com/photo-1513026705753-bc3fffca8bf4?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80'} ]
 
+const CustomNextArrow = (props) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+     
+      onClick={onClick}
+    >
+    
+      <ChevronRightIcon className="text-black dark:text-white h-5 lg:h-10 w-5 lg:w-10 bg-red-600 rounded-lg" />
+     
+    </div>
+  );
+};
 
+const CustomPrevArrow = (props) => {
+  const { className, style, onClick } = props;
+  
+  return (
+    <div
+      className={`${className}`}
+     
+      onClick={onClick}
+    >
+      <ChevronLeftIcon className="text-black dark:text-white h-5 lg:h-10 w-5 lg:w-10 bg-red-600 rounded-lg" />
+    </div>
+  );
+};
 
 export default function Index({ allPosts: { edges }, preview }) {
   const heroPost = edges[1]?.node
   const morePosts = edges
+
+  useEffect(()=>{
+console.log(morePosts)
+  },[])
+
+  const settings = {
+    className: "center",
+    centerMode: true,
+    infinite: true,
+    pagination: true,
+    slidesToShow: 4,
+    centerPadding: "60px",
+    responsive: [
+      {
+        breakpoint: 1280,
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+      
+    ],
+    speed: 500,
+    nextArrow: <CustomNextArrow  />,
+    prevArrow: <CustomPrevArrow />,
+  };
 
   return (
     <>
@@ -93,44 +158,66 @@ export default function Index({ allPosts: { edges }, preview }) {
         </div>
         </div>
       </div>
-      <Container>
-      <div className="mt-5 ">
-      <div className="mb-16">
+      
+      <div >
+        <div className="mt-14 px-8 md:px-14 ">
             <h1 className=" text-xl md:text-2xl  text-gray-900 dark:text-slate-100 ">
              Most seen videos <span className='text-red-500 text-lg ml-5'>Explore now</span>
             </h1>
-            </div>
-            <div className="container mx-auto py-4">
-            <Swiper
+        </div>
+        <div className="my-10 ">
+            
+            {/* <Swiper
       // install Swiper modules
-      // style={{
-      //   "--swiper-navigation-color": "#fff",
-      //   "--swiper-pagination-color": "#fff",
-      // }}
+  
       modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
       spaceBetween={50}
-      slidesPerView={3}
+      // slidesPerView={3}
       navigation
       className="mySwiper"
       pagination={{ clickable: true }}
       scrollbar={{ draggable: true }}
       onSwiper={(swiper) => console.log(swiper)}
       onSlideChange={() => console.log('slide change')}
-    >
-       {images.map((slideContent, index) => (
-        <SwiperSlide key={index} virtualIndex={index}>
+      breakpoints={{
+        // Configure breakpoints based on screen width
+        0: {
+          slidesPerView: 2,
+        },
+        768: {
+          slidesPerView: 2,
+        },
+        1024: {
+          slidesPerView: 3,
+        },
+      }}
+    > */}
+    {morePosts && (
+      <Slider {...settings}>
+    {morePosts.map((slideContent, index) => (
+        <div className='p-3'>
+           <Link
+              href={`/posts/${slideContent.node.slug}`}
+              // className="hover:underline"
+              // dangerouslySetInnerHTML={{ __html: title }}
+            >
           <img
             key={index}
-            src={slideContent.img}
-            alt={`Slide ${index + 1}`}
-            className="mx-auto max-w-full w-full"
+            src={slideContent.node.featuredImage.node.sourceUrl}
             
+            className="h-20 md:h-40 lg:h-60  object-cover overflow-hidden  "
           />
           
-        </SwiperSlide>
+          <div className='text-black dark:text-white text-center justify-center py-4'>{slideContent.node.title}</div>
+          </Link>
+        </div>
       ))}
+    </Slider>
+    )}
+    
+       
      
-    </Swiper>
+    {/* </Swiper> */}
     </div>
         {heroPost && (
           <HeroPost
@@ -140,11 +227,12 @@ export default function Index({ allPosts: { edges }, preview }) {
             author={heroPost.author}
             slug={heroPost.slug}
             excerpt={heroPost.excerpt}
+            
           />
         )}
         {morePosts.length > 0 && <MoreStories posts={morePosts} title={'More Events'} />}
         </div>
-      </Container>
+   
     </>
   )
 }
