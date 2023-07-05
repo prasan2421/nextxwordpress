@@ -143,7 +143,7 @@ export default function Layout({ children }) {
         </Dialog>
       </header>
       <main>{children}</main>
-      <Footer />
+      <Footer nav={navigation} />
     </div>
 
   )
