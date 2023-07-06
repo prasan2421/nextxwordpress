@@ -8,7 +8,7 @@ import Layout from '../components/layout'
 import { getAllPostsForHome } from '../lib/api'
 import { CMS_NAME } from '../lib/constants'
 import { useEffect, useState, createRef,useRef } from 'react'
-import cover from '../public/images/cover.png'
+import cover from '../public/images/cover.png' 
 // Import Slick React components
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -71,6 +71,9 @@ export default function Index({ allPosts: { edges }, preview }) {
 
   const swiperRef = useRef(null);
 
+
+
+
   const goPrev = () => {
     if (swiperRef.current && swiperRef.current.swiper) {
       swiperRef.current.swiper.slidePrev();
@@ -88,7 +91,8 @@ export default function Index({ allPosts: { edges }, preview }) {
     centerMode: true,
     infinite: true,
     pagination: true,
-    // autoplay: true,
+    autoplay: true,
+    slidesToScroll: 1,
     slidesToShow: 4,
     centerPadding: "60px",
     pauseOnHover: true,
@@ -131,7 +135,7 @@ export default function Index({ allPosts: { edges }, preview }) {
       </Head>
       
       <div className="flex h-screen flex-col">
-        <div className="relative isolate flex flex-1 bg-[url('../public/images/cover.png')] bg-cover">
+        <div className="relative isolate flex flex-1 bg-cover-image bg-cover">
       
          
             <div className='justify-center md:justify-start pl-5 md:pl-14 flex-1 flex items-center '>

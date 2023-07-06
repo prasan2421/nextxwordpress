@@ -24,15 +24,16 @@ export default function Layout({ children }) {
   const { theme, setTheme, resolvedTheme } = useTheme()
 
   useEffect(()=>{
+    console.log(resolvedTheme)
     setTheme('system');
-    console.log(theme)
+    
   },[])
 
   const toggleTheme = () => {
    
-    if (resolvedTheme === 'light') {
+    if (theme==='light' || resolvedTheme === 'light') {
       setTheme('dark');
-    } else if (resolvedTheme === 'dark') {
+    } else if (theme==='dark' || resolvedTheme === 'dark') {
       setTheme('light');
     } 
   }; 
@@ -42,7 +43,7 @@ export default function Layout({ children }) {
      
       <header className="absolute inset-x-0 top-0 z-50">
       {/* <Alert preview={preview} /> */}
-        <nav className="fixed w-full flex items-center justify-between py-6 px-5 md:px-14  bg-white dark:bg-zinc-900" aria-label="Global">
+        <nav className="fixed w-full flex items-center justify-between py-6 px-5 md:px-14 border-b border-accent-2  bg-white dark:bg-zinc-900" aria-label="Global">
           <div className="flex lg:flex-1">
             <Link 
             href={'/'}

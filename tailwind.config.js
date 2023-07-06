@@ -7,6 +7,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backgroundImage:{
+        'cover-image':"url('../public/images/cover.png')",
+        'about-cover':"url('../public/images/about-cover.png')"
+      },
       colors: {
         'accent-1': '#FAFAFA',
         'accent-2': '#EAEAEA',
@@ -21,6 +25,8 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
   darkMode: 'class'
 }

@@ -63,7 +63,49 @@ export async function getAllPostsForHome(preview) {
   const data = await fetchAPI(
     `
     query AllPosts {
-      posts(first: 20, where: { orderby: { field: DATE, order: DESC } }) {
+      posts(first: 20, where: { orderby: { field: DATE, order: DESC }, categoryName: "events" }) {
+        edges {
+          node {
+            title
+            excerpt
+            slug
+            date
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+            author {
+              node {
+                name
+                firstName
+                lastName
+                avatar {
+                  url
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `,
+    {
+      variables: {
+        onlyEnabled: !preview,
+        preview,
+      },
+    }
+  )
+
+  return data?.posts
+}
+
+export async function getAllTeamPosts(preview) {
+  const data = await fetchAPI(
+    `
+    query AllPosts {
+      posts(first: 20, where: { orderby: { field: DATE, order: DESC }, categoryName: "team"}) {
         edges {
           node {
             title
